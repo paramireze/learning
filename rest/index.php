@@ -16,7 +16,6 @@
 		$id = lastId();
 	}
 
-
 	if (!empty($action)) {
 		switch($action) {
 			case 'getAll':			
@@ -28,6 +27,7 @@
 					deliver_response(200, "actors found", $actors);
 				}
 				break;
+
 			case 'get':			
 				header("Content-Type:application/json");					
 				$actor = getActor($id);
@@ -37,6 +37,7 @@
 					deliver_response(200, "actors found", $actor);
 				}
 				break;
+
 			case 'insert':
 				header("Content-Type:application/json");					
 				if (!empty($_POST['name'])) {
@@ -55,14 +56,6 @@
 				}
 				break;
 
-			// case 'clear':
-			// 	header("Content-Type:application/json");									
-			// 	if (empty($actors)) {
-			// 		deliver_response(200, "actors not here", null);
-			// 	} else {
-			// 		deliver_response(200, "actors found", $actors);
-			// 	}
-			// 	break;
 			case 'updateActor':
 				header("Content-Type:application/json");
 
@@ -81,19 +74,14 @@
 					deliver_response(200, "actors found", $actor);
 				}
 				break;
-
 		}
-
 	}
-
-
 
 	function deliver_response($status, $status_message, $data) {
 		header("HTTP/1.1 $status $status_message");
 		$response['status'] = $status;
 		$response['status_message'] = $status_message;
 		$response['data'] = $data;
-
 		$json_response=json_encode($response);
 		echo $json_response;
 	}
