@@ -23,6 +23,7 @@ $(function() {
 			success: function(users) {
 				$.each(users['data'], function(i, user) {
 					$users.append('<li id=' + user.id + '>user: ' + user.name + ' ' + user.created + '</li>');
+					populateForm(user);
 				});
 			}
 		});
@@ -35,8 +36,8 @@ $(function() {
 			type:'POST',
 			data: { name: $('#txtName').val(), text: $('#txtText').val(), action: 'insert'},
 			url: '/learning/rest/',
-			success: function(user) {
-				$orders.prepend('<li id=' + user.id + '>user: ' + user.name + ' ' + user.created + '</li>');
+			success: function(user) {				
+				$orders.prepend('<li id=' + user['data'].id + '>user: ' + user['data'].name + ' ' + user['data'].created + '</li>');
 			}
 
 		});
@@ -49,8 +50,6 @@ $(function() {
 			data: { id: $('#txtId').val(), name: $('#txtName').val(), text: $('#txtText').val(), action: 'updateActor'},
 			url: '/learning/rest/',
 			success: function(user) {
-				//$('#orders').prepend('<li>asdf</li>');
-				//console.log('hi');
 				$('#' + user['data'].id).replaceWith('<li id=' + user['data'].id + '>user: ' + user['data'].name + ' ' + user['data'].created + '</li>');
 			}			
 		});
