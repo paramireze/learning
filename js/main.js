@@ -70,7 +70,7 @@ $(function() {
 			success: function(user) {
 				//$('#orders').prepend('<li>asdf</li>');
 				//console.log('hi');
-				$('#' + user['data'].id).replaceWith('<li id="' + user['data'].id + '">user: ' + user['data'].name + ' ' + user['data'].created + '</li>');
+				$('#' + user['data'].id).replaceWith('<li id=' + user['data'].id + '>user: ' + user['data'].name + ' ' + user['data'].created + '</li>');
 			}			
 		});
 	});	

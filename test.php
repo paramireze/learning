@@ -9,8 +9,8 @@
 <div>		
 	<!--<script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>--><div>
 	<?php 
-
-	include 'functions/actor.php';
+	include 'common.php';
+	include DIR_ROOT . 'functions/actor.php';
 	$id = lastId();
 	echo 'hi: ' . $id . '<br />';
 	$actor = getActors();

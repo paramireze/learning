@@ -1,6 +1,11 @@
 <?php
-  include 'C:\xampp\htdocs\learning\db\dbConnection.php'; 
-  include 'C:\xampp\htdocs\learning\db\do_pdo_query.php';
+  
+  include 'C:/xampp/htdocs/learning/common.php';
+  include DIR_ROOT . 'db/dbConnection.php'; 
+  include DIR_ROOT . 'db/do_pdo_query.php';
+   
+  // include 'C:/xampp/htdocs/learning/db/dbConnection.php'; 
+  // include 'C:/xampp/htdocs/learning/db/do_pdo_query.php';
  
   function getActors() {
     $dbConnection = pdo_connect_radweb();

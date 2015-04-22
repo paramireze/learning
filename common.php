@@ -28,7 +28,7 @@ if (isset($_SERVER['HTTPS']) && strip_tags($_SERVER['HTTPS']) == 'on') {
 else {
 	$protocol = 'http';
 }
-// define WWW_ROOT, DIR_ROOT, iWWW_ROOT, iDIR_ROOT, pWWW_ROOT, pDIR_ROOT
+// define WWW_ROOT, DIR_ROOT
 // WWW_ROOT
 if (!defined('WWW_ROOT')) {
 	if (!empty($_SERVER['HTTP_HOST']) && strip_tags($_SERVER['HTTP_HOST']) == 'r-testweb.uwhis.hosp.wisc.edu') {
@@ -46,21 +46,8 @@ if (!defined('WWW_ROOT')) {
 //DIR_ROOT refers to the root of the intranet when viewed via the file system
 if (!defined('DIR_ROOT')) {
 	if (!empty($_SERVER['HTTP_HOST']) && (strip_tags($_SERVER['HTTP_HOST']) == 'localhost')) {
-		define('DIR_ROOT', 'C:\xampp\htdocs\radiology-website\\');
+		define('DIR_ROOT', 'C:/xampp/htdocs/learning/');
 	} else {
 		define('DIR_ROOT', '/var/www/html/');
-	}
-}
-
-// iWWW_ROOT
-if (!defined('iWWW_ROOT')) {
-	if (!empty($_SERVER['HTTP_HOST']) && strip_tags($_SERVER['HTTP_HOST']) == 'r-testweb.uwhis.hosp.wisc.edu') {
-		define('iWWW_ROOT', $protocol.'://r-testweb.uwhis.hosp.wisc.edu/protected/intranet/');
-	}
-	else if (!empty($_SERVER['HTTP_HOST']) && (strip_tags($_SERVER['HTTP_HOST']) == 'localhost')) {
-		define('iWWW_ROOT', $protocol . '://localhost/radiology-website/protected/intranet/');
-	}
-	else {
-		define('iWWW_ROOT', $protocol.'://www.radiology.wisc.edu/protected/intranet/');
 	}
 }

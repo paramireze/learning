@@ -1,5 +1,6 @@
 <?php 
-	include '../functions/actor.php';
+	include '../common.php';
+	include DIR_ROOT . 'functions/actor.php';
 
 	if (!empty($_GET['action'])) {
 		$action = $_GET['action'];
