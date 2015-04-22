@@ -1,6 +1,3 @@
-	
-
-
 $(function() {
 	var $users = $('#orders');
 	$.ajax({
@@ -9,11 +6,10 @@ $(function() {
 		success: function(users) {
 			$.each(users['data'], function(i, user) {
 				$users.append('<li id=' + user.id + '>user: ' + user.name + ' ' + user.created + '</li>');				
-				populateForm(user);				
+				populateFormOnClick(user);				
 			});
 		}
 	});
-
 
 	$('#get').on('click', function(e) {
 		var $users = $('#orders');
@@ -23,12 +19,11 @@ $(function() {
 			success: function(users) {
 				$.each(users['data'], function(i, user) {
 					$users.append('<li id=' + user.id + '>user: ' + user.name + ' ' + user.created + '</li>');
-					populateForm(user);
+					populateFormOnClick(user);
 				});
 			}
 		});
 	});
-	
 	
 	$('#insert').on('click', function(e) {
 		var $orders = $('#orders');
@@ -39,7 +34,6 @@ $(function() {
 			success: function(user) {				
 				$orders.prepend('<li id=' + user['data'].id + '>user: ' + user['data'].name + ' ' + user['data'].created + '</li>');
 			}
-
 		});
 	});	
 
@@ -51,17 +45,21 @@ $(function() {
 			url: '/learning/rest/',
 			success: function(user) {
 				$('#' + user['data'].id).replaceWith('<li id=' + user['data'].id + '>user: ' + user['data'].name + ' ' + user['data'].created + '</li>');
+				confirmationMessage('update successful');
 			}			
 		});
 	});	
-
 
 	$('#clear').on('click', function(e) {
 		$('#orders').children('li').remove();
 	});	
 });
 
-function populateForm(user) {
+function confirmationMessage(message) {
+	$('#alertMessage').replaceWith('<div class="bg-success" id="alertMessage"> ' + message + ' </div>');
+}
+
+function populateFormOnClick(user) {
 	$('#' + user.id).on('click', function(e) {
 		console.log($('#' + user.id).attr('id'));
 		$('#txtId').val(user.id);
