@@ -4,9 +4,6 @@
   include DIR_ROOT . 'db/dbConnection.php'; 
   include DIR_ROOT . 'db/do_pdo_query.php';
    
-  // include 'C:/xampp/htdocs/learning/db/dbConnection.php'; 
-  // include 'C:/xampp/htdocs/learning/db/do_pdo_query.php';
- 
   function getActors() {
     $dbConnection = pdo_connect_radweb();
     $get_actor_query['query']="SELECT *  FROM user order by created desc";
@@ -32,7 +29,6 @@
     }
   }
 
-
   function addActor($name, $text) {
     $dbConnection = pdo_connect_radweb();
     $get_actor_query['query']="insert into user values (DEFAULT, :name, now(), :text )";
@@ -47,7 +43,6 @@
   }
 
   function updateActor($id, $name, $text) {
-    
     $dbConnection = pdo_connect_radweb();
     $get_actor_query['query']="update user 
         set 
@@ -65,7 +60,6 @@
     return getActor($id);
   }
 
-
   function lastId() {
     $dbConnection = pdo_connect_radweb();
     $get_actor_query['query']="SELECT id FROM user ORDER BY id DESC LIMIT 0, 1";
@@ -74,5 +68,4 @@
     $get_actor_row = $get_actor_stmt->fetch();
     return $get_actor_row['id'];  
   }
-
-  ?>
+?>

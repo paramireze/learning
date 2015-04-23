@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
 	<title>jquery ajax tutorial</title>
 	<?php 
@@ -60,12 +60,11 @@
 <ul id="orders">
 
 <?php
-
-$actors = getActors();
-echo '</ul>';
-echo '<pre>';
-print_r($actor);
-echo '</pre>';
+  $actors = getActors();
+  echo '</ul>';
+  echo '<pre>';
+  print_r($actor);
+  echo '</pre>';
 ?>
 <div>
 	<script src="js/jquery-1.11.2.min.js"></script>
