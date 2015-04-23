@@ -27,8 +27,8 @@ $(function() {
 			type:'GET',
 			url: '/learning/rest/getAll',
 			success: function(users) {
-				$.each(users['data'], function(i, user) {
-					$users.append('<li id=' + user.id + '>user: ' + user.name + ' ' + user.created + '</li>');
+				$.each(users, function(i, user) {
+					$users.append(displayUser(user));
 					populateFormOnClick(user);
 				});
 			}
@@ -42,7 +42,7 @@ $(function() {
 			data: { name: $('#txtName').val(), text: $('#txtText').val(), action: 'insert'},
 			url: '/learning/rest/',
 			success: function(user) {				
-				$orders.prepend('<li id=' + user['data'].id + '>user: ' + user['data'].name + ' ' + user['data'].created + '</li>');
+				$orders.prepend(displayUser(user));
 			}
 		});
 	});	
@@ -54,7 +54,7 @@ $(function() {
 			data: { id: $('#txtId').val(), name: $('#txtName').val(), text: $('#txtText').val(), action: 'updateActor'},
 			url: '/learning/rest/',
 			success: function(user) {
-				$('#' + user['data'].id).replaceWith('<li id=' + user['data'].id + '>user: ' + user['data'].name + ' ' + user['data'].created + '</li>');
+				$('#' + user['data'].id).replaceWith(displayUser(user));
 				confirmationMessage('update successful');
 			}			
 		});
@@ -67,6 +67,10 @@ $(function() {
 
 function confirmationMessage(message) {
 	$('#alertMessage').replaceWith('<div class="bg-success" id="alertMessage"> ' + message + ' </div>');
+}
+
+function displayUser(user) {
+	return '<li id=' + user['data'].id + '>user: ' + user['data'].name + ' ' + user['data'].created + '</li>';
 }
 
 function populateFormOnClick(user) {
