@@ -25,7 +25,7 @@
 <div  class="bg-success" id='alertMessage'></div> 
 <h3 id='addUser'>add a user</h3>
 
-<form class="form-horizontal">
+<div class="form-horizontal">
   <div class="form-group">
     <label class="col-sm-2 control-label">id</label>
     <div class="col-sm-10">
@@ -50,25 +50,49 @@
       <input type="text" class="form-control" id="txtText">
     </div>
   </div>  
-
-</form>
-<button class="btn btn-default" id="get">get</button>
-<button class="btn btn-default" id="clear">clear</button>
-<button class="btn btn-default" id="update">update</button>
-<button class="btn btn-default" id="insert">insert</button>
+  <div class="form-group">
+  <label class="col-sm-2 control-label"></label>
+	<div class="col-sm-10">
+		<button class="btn btn-default" id="get">get</button>
+		<button class="btn btn-default" id="clear">clear</button>
+		<button class="btn btn-default" id="update">update</button>
+		<button class="btn btn-default" id="insert">insert</button>		
+	</div>
+  </div>
+</div>
 <h2>users</h2>
-<ul id="orders">
+<ul class="users">
+	<script id="template" type="text/x-handlebars-template">
+	<li>
+		<h2>{{name}}</h2>
+		<p>{{text}}</p>
+	</li>
+	</script>
+</ul>
+<ul id="orders"></ul>
 
 <?php
-  $actors = getActors();
-  echo '</ul>';
-  echo '<pre>';
-  print_r($actor);
-  echo '</pre>';
+	$actors = getActors();
+	echo '<pre>';
+	print_r($actors);
+	echo '</pre>';
 ?>
 <div>
 	<script src="js/jquery-1.11.2.min.js"></script>
 	<script src="js/handlebars-v3.0.1.js"></script>
 	<script src="js/main.js"></script>
+	<script>
+	(function() {
+
+	var data = {
+		name: 'paul',
+		text: 'handle bars'
+	};
+	var template = Handlebars.compile( $('#template').html());
+	var temp = template(data);
+	console.log(temp);
+	$(document.body).append(template(data));
+	})();
+	</script>
 </body>
 </html>
