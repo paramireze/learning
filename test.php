@@ -61,14 +61,22 @@
   </div>
 </div>
 <h2>users</h2>
-<ul class="users">
-	<script id="template" type="text/x-handlebars-template">
-	<li>
-		<h2>{{name}}</h2>
-		<p>{{text}}</p>
-	</li>
+<table class="users table">
+	<th>id</th>
+	<th>name</th>
+	<th>text</th>
+	<th>created</th>
+	<script id="template" type="text/x-handlebars-template">	
+	{{#each this}}
+	<tr id={{id}}>
+		<td>{{id}}</td>
+		<td>{{name}}</td>
+		<td>{{text}}</td>
+		<td>{{created}}</td>		
+	</tr>
+	{{/each}}
 	</script>
-</ul>
+</table>
 <ul id="orders"></ul>
 
 <?php
@@ -83,15 +91,14 @@
 	<script src="js/main.js"></script>
 	<script>
 	(function() {
-
-	var data = {
-		name: 'paul',
-		text: 'handle bars'
-	};
-	var template = Handlebars.compile( $('#template').html());
-	var temp = template(data);
-	console.log(temp);
-	$(document.body).append(template(data));
+		var source = $("#template").html();
+		var template = Handlebars.compile(source);
+		// var temp = template(data);
+		// console.log(temp);
+		var data = {name: 'paul', text: 'handle bars'};
+		var html = template(data);
+		console.log(html);
+		$('.users').append(html);
 	})();
 	</script>
 </body>

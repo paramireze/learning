@@ -1,25 +1,56 @@
 $(function() {
-
-	var data = {
-		name: 'paul',
-		text: 'handle bars'
-	};
-	var template = Handlebars.compile( $('#template').html());
-	var temp = template(data);
-	console.log(temp);
-	$(document.body).append(template(data));
-
+	
 	var $users = $('#orders');
 	$.ajax({
 		type:'GET',
-		url: '/learning/rest/getAll',
+		url: '/learning/rest/getAll',		
 		success: function(users) {
-			$.each(users['data'], function(i, user) {
-				$users.append('<li id=' + user.id + '>user: ' + user.name + ' ' + user.created + '</li>');				
-				populateFormOnClick(user);				
+			displayUsers(users);
+		 	$("tr").on('click', function(e){ 		
+			 	populateFormOnClickUsingAjax($(this));
 			});
 		}
 	});
+
+	function displayUsers(users) {
+		var data = [];
+		var template = Handlebars.compile($('#template').html());						
+		$('.users').append(template(data));
+		$.each(users['data'], function(i, user) {
+			data.push({id: user.id, name: user.name, text: user.text, created: user.created});
+		});
+		var html = template(data);
+		$('.users').append(html);		
+	}
+	
+	function displayUser(user) {
+		/*
+		<tr id={{id}}>
+			<td>{{id}}</td>
+			<td>{{name}}</td>
+			<td>{{text}}</td>
+			<td>{{created}}</td>		
+		</tr>
+		 */
+		return '<tr id=' 
+				+ user['data'].id + '><td>' 
+				+ user['data'].id + '</td><td>' 
+				+ user['data'].name + '</td><td>' 
+				+ user['data'].text + '</td><td>' 
+				+ user['data'].created + '</td><td></tr>';
+	}
+
+	function doStuff(users) {
+		var data = [];
+		var template = Handlebars.compile( $('#template').html());						
+		$('.users').append(template(data));
+		$.each(users['data'], function(i, user) {
+			data.push({id: user.id, name: user.name, text: user.text, created: user.created});
+		});
+		var html = template(data);
+		$('.users').append(html);		
+	}
+
 
 	$('#get').on('click', function(e) {
 		var $users = $('#orders');
@@ -28,7 +59,7 @@ $(function() {
 			url: '/learning/rest/getAll',
 			success: function(users) {
 				$.each(users, function(i, user) {
-					$users.append(displayUser(user));
+					//$users.append(displayUser(user));
 					populateFormOnClick(user);
 				});
 			}
@@ -42,7 +73,8 @@ $(function() {
 			data: { name: $('#txtName').val(), text: $('#txtText').val(), action: 'insert'},
 			url: '/learning/rest/',
 			success: function(user) {				
-				$orders.prepend(displayUser(user));
+				alert('fix me');
+				//$orders.prepend(displayUser(user));
 			}
 		});
 	});	
@@ -69,16 +101,29 @@ function confirmationMessage(message) {
 	$('#alertMessage').replaceWith('<div class="bg-success" id="alertMessage"> ' + message + ' </div>');
 }
 
-function displayUser(user) {
-	return '<li id=' + user['data'].id + '>user: ' + user['data'].name + ' ' + user['data'].created + '</li>';
+
+function populateFormOnClickUsingAjax(myObj) {
+	$.ajax({
+ 		type:'GET',
+ 		url: '/learning/rest/get/' + myObj.attr("id"),
+ 		success: function(user) {
+ 			console.log(user);
+ 			populateForm(user['data']);
+ 		}
+ 	});
 }
 
 function populateFormOnClick(user) {
+
 	$('#' + user.id).on('click', function(e) {
 		console.log($('#' + user.id).attr('id'));
-		$('#txtId').val(user.id);
-		$('#txtName').val(user.name);
-		$('#txtCreated').val(user.created);
-		$('#txtText').val(user.text);	
+		populateForm(user);
 	});
+}
+
+function populateForm(user) {
+	$('#txtId').val(user.id);
+	$('#txtName').val(user.name);
+	$('#txtCreated').val(user.created);
+	$('#txtText').val(user.text);	
 }
