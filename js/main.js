@@ -1,4 +1,14 @@
 $(function() {
+
+	var data = {
+		name: 'paul',
+		text: 'handle bars'
+	};
+	var template = Handlebars.compile( $('#template').html());
+	var temp = template(data);
+	console.log(temp);
+	$(document.body).append(template(data));
+
 	var $users = $('#orders');
 	$.ajax({
 		type:'GET',
